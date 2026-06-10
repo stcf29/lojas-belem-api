@@ -34,7 +34,7 @@ public class LojaController {
         return Categoria.values();
     }
 
-    @PostMapping
+    @PostMapping("/adicionarLoja")
     public Loja salvar(@RequestBody Loja loja) {
         return repository.save(loja);
     }
