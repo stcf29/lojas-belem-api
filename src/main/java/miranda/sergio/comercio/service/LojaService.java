@@ -36,4 +36,32 @@ public class LojaService {
 
         return dto;
     }
+
+    public void salvarLote(List<Loja> lojasDTO) {
+        List<Loja> lojas = lojasDTO.stream().map(this::converter).toList();
+        repository.saveAll(lojas);
+    }
+
+    private Loja converter(Loja dto) {
+
+        Loja loja = new Loja();
+
+        loja.setNome(dto.getNome());
+        loja.setEndereco(dto.getEndereco());
+        loja.setNumero(dto.getNumero());
+        loja.setComplemento(dto.getComplemento());
+        loja.setBairro(dto.getBairro());
+        loja.setCep(dto.getCep());
+        loja.setTelefone(dto.getTelefone());
+        loja.setWhatsapp(dto.getWhatsapp());
+        loja.setEmail(dto.getEmail());
+        loja.setInstagram(dto.getInstagram());
+        loja.setCategoria(dto.getCategoria());
+        loja.setLatitude(dto.getLatitude());
+        loja.setLongitude(dto.getLongitude());
+
+        return loja;
+    }
+
+
 }

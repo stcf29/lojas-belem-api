@@ -1,34 +1,40 @@
 package miranda.sergio.comercio.service;
 
+import com.resend.Resend;
 import miranda.sergio.comercio.dto.FormFaleConosco;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.beans.factory.annotation.Value;
+import com.resend.services.emails.model.SendEmailRequest;
+import com.resend.services.emails.model.SendEmailResponse;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ContatoService {
 
-    private final JavaMailSender mailSender;
-
-    public ContatoService(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
-    }
+    @Value("${resend.api.key}")
+    private String apiKey;
 
     public void enviarEmail(FormFaleConosco form) {
+        Resend resend = new Resend(apiKey);
+        SendEmailRequest request = SendEmailRequest.builder().from("Ver-O-Centro <onboarding@resend.dev>")
+                .to("vemanoelmiranda@gmail.com")
+                .subject(form.getAssunto())
+                .html("""
+                        <h2>Novo contato</h2>
 
-        SimpleMailMessage mensagem = new SimpleMailMessage();
+                        <p><b>Nome:</b> %s</p>
 
-        mensagem.setTo("meusite@gmail.com");
+                        <p><b>Email:</b> %s</p>
 
-        mensagem.setSubject("Novo contato pelo site");
+                        <p><b>Telefone:</b> %s</p>
+                        
+                        <p><b>Assunto:</b> %s</p>
 
-        mensagem.setText(
-                "Nome: " + form.getNome() +
-                        "\n\nEmail: " + form.getEmail() +
-                        "\n\nTelefone: " + form.getTelefone() +
-                        "\n\nAssunto: " + form.getAssunto() +
-                        "\n\nMensagem:\n" + form.getMensagem());
+                        <p><b>Mensagem:</b></p>
 
-        mailSender.send(mensagem);
+                        <p>%s</p>
+                        """
+                        .formatted(form.getNome(), form.getEmail(), form.getTelefone(), form.getAssunto(), form.getMensagem())).build();
+        SendEmailResponse response = resend.emails().send(request);
+        System.out.println(response.getId());
     }
 }

@@ -44,8 +44,14 @@ public class LojaController {
     }
 
     @PostMapping("/faleConosco")
-    public ResponseEntity<Void> enviar(@RequestBody FormFaleConosco form) {
+    public ResponseEntity<String> enviar(@RequestBody FormFaleConosco form) {
         contatoService.enviarEmail(form);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok("Mensagem enviada com sucesso!");
+    }
+
+    @PostMapping("/lote")
+    public ResponseEntity<String> cadastrarLote(@RequestBody List<Loja> lojas) {
+        service.salvarLote(lojas);
+        return ResponseEntity.ok("Lote de lojas adicionado com sucesso!");
     }
 }
