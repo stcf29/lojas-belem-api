@@ -38,4 +38,6 @@ public class Loja {
     private Double latitude;
 
     private Double longitude;
+
+    private Boolean destaque;
 }

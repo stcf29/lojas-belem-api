@@ -17,24 +17,27 @@ public class LojaService {
         this.repository = repository;
     }
 
-    public List<LojaRespostaDTO> pesquisarPorNome(FiltroPesquisa filtro) {
-        return repository.findByNomeContainingIgnoreCase(filtro.getNome())
-                .stream()
-                .map(this::toDTO)
-                .toList();
-    }
+    public List<Loja> pesquisar(FiltroPesquisa filtro) {
 
-    private LojaRespostaDTO toDTO(Loja loja) {
+        if(filtro.getNome() != null && !filtro.getNome().isBlank()
+                && filtro.getCategoria() != null){
 
-        LojaRespostaDTO dto = new LojaRespostaDTO();
+            return repository.findByNomeContainingIgnoreCaseAndCategoria(
+                    filtro.getNome(),
+                    filtro.getCategoria());
+        }
 
-        dto.setId(loja.getId());
-        dto.setNome(loja.getNome());
-        dto.setEndereco(loja.getEndereco());
-        dto.setBairro(loja.getBairro());
-        dto.setCategoria(loja.getCategoria());
+        if(filtro.getNome() != null && !filtro.getNome().isBlank()){
+            return repository.findByNomeContainingIgnoreCase(filtro.getNome());
 
-        return dto;
+        }
+
+        if(filtro.getCategoria() != null){
+            return repository.findByCategoria(filtro.getCategoria());
+
+        }
+
+        return repository.findAll();
     }
 
     public void salvarLote(List<Loja> lojasDTO) {
@@ -43,7 +46,6 @@ public class LojaService {
     }
 
     private Loja converter(Loja dto) {
-
         Loja loja = new Loja();
 
         loja.setNome(dto.getNome());

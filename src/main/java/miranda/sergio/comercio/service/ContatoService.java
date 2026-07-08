@@ -35,6 +35,5 @@ public class ContatoService {
                         """
                         .formatted(form.getNome(), form.getEmail(), form.getTelefone(), form.getAssunto(), form.getMensagem())).build();
         SendEmailResponse response = resend.emails().send(request);
-        System.out.println(response.getId());
     }
 }

@@ -11,4 +11,6 @@ public interface LojaRepository extends JpaRepository<Loja, Long> {
     List<Loja> findByNomeContainingIgnoreCase(String nome);
 
     List<Loja> findByCategoria(Categoria categoria);
+
+    List<Loja> findByNomeContainingIgnoreCaseAndCategoria(String nome, Categoria categoria);
 }

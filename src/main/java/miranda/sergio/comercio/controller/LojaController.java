@@ -29,8 +29,8 @@ public class LojaController {
     }
 
     @PostMapping("/pesquisarLojas")
-    public ResponseEntity<List<LojaRespostaDTO>> pesquisar(@RequestBody FiltroPesquisa filtro) {
-        return ResponseEntity.ok(service.pesquisarPorNome(filtro));
+    public ResponseEntity<List<Loja>> pesquisar(@RequestBody FiltroPesquisa filtro) {
+        return ResponseEntity.ok(service.pesquisar(filtro));
     }
 
     @GetMapping("/listCategorias")
@@ -44,14 +44,14 @@ public class LojaController {
     }
 
     @PostMapping("/faleConosco")
-    public ResponseEntity<String> enviar(@RequestBody FormFaleConosco form) {
+    public ResponseEntity<Void> enviar(@RequestBody FormFaleConosco form) {
         contatoService.enviarEmail(form);
-        return ResponseEntity.ok("Mensagem enviada com sucesso!");
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/lote")
-    public ResponseEntity<String> cadastrarLote(@RequestBody List<Loja> lojas) {
+    public ResponseEntity<Void> cadastrarLote(@RequestBody List<Loja> lojas) {
         service.salvarLote(lojas);
-        return ResponseEntity.ok("Lote de lojas adicionado com sucesso!");
+        return ResponseEntity.ok().build();
     }
 }
