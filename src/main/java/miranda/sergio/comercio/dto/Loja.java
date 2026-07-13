@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import miranda.sergio.comercio.enums.Categoria;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @Table(name = "loja")
@@ -40,4 +43,12 @@ public class Loja {
     private Double longitude;
 
     private Boolean destaque;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "loja_tags",
+            joinColumns = @JoinColumn(name = "loja_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private List<Tag> tags = new ArrayList<>();
 }

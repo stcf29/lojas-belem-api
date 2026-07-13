@@ -40,7 +40,7 @@ public class LojaController {
 
     @PostMapping("/adicionarLoja")
     public Loja salvar(@RequestBody Loja loja) {
-        return repository.save(loja);
+        return service.salvar(loja);
     }
 
     @PostMapping("/faleConosco")
