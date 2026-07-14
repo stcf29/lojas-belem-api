@@ -15,7 +15,6 @@ import java.util.List;
 public class LojaService {
 
     private final LojaRepository repository;
-
     private final TagRepository tagRepository;
 
     public LojaService(LojaRepository repository, TagRepository tagRepository) {
@@ -76,5 +75,9 @@ public class LojaService {
         loja.setLongitude(dto.getLongitude());
         loja.setTags(dto.getTags());
         return loja;
+    }
+
+    public List<Loja> listar() {
+        return repository.findAll();
     }
 }

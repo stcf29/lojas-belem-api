@@ -37,9 +37,11 @@ public class Loja {
     private String instagram;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Categoria categoria;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Plano plano = Plano.GRATUITO;
 
     private Double latitude;

@@ -33,6 +33,11 @@ public class LojaController {
         return ResponseEntity.ok(service.pesquisar(filtro));
     }
 
+    @GetMapping("/listar")
+    public List<Loja> listar() {
+        return service.listar();
+    }
+
     @GetMapping("/listCategorias")
     public Categoria[] listarCategorias() {
         return Categoria.values();
