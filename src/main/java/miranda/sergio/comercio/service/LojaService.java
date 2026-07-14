@@ -28,9 +28,7 @@ public class LojaService {
         boolean temCategoria = filtro.getCategoria() != null;
 
         if (temTexto && temCategoria) {
-            return repository.pesquisarPorTextoECategoria(
-                    filtro.getNome(),
-                    filtro.getCategoria());
+            return repository.pesquisarPorTextoECategoria(filtro.getNome(), filtro.getCategoria());
         }
 
         if (temTexto) {
