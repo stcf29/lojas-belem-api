@@ -14,7 +14,9 @@ public enum Categoria {
     INFORMATICA("Informática"),
     COSMETICOS("Cosmético"),
     UTILIDADES("Utilidades"),
-    ALIMENTACAO("Alimentação");
+    ALIMENTACAO("Alimentação"),
+    CASA("Casa e Decoração"),
+    CONSTRUCAO("Construção");
 
     private final String descricao;
 
