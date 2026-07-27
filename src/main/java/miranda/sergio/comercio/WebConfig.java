@@ -15,6 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
                         "http://localhost:4200",
                         "http://localhost:3000",
                         "https://verocentro.com",
+                        "https://www.verocentro.com",
                         "https://verocentro.com.br",
                         "https://www.verocentro.com.br"
                 )
