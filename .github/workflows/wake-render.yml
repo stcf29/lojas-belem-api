@@ -1,0 +1,16 @@
+name: Wake Render Backend
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+
+  workflow_dispatch:
+
+jobs:
+  wake:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ping backend
+        run: |
+          curl -I https://lojas-belem-api.onrender.com/lojas/listar
